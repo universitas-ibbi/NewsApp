@@ -6,6 +6,8 @@ Image,
 StyleSheet
 } from 'react-native'
 
+import MenuNavigasi from "./components/MenuNavigasi";
+import CardBerita from "./components/CardBerita";
 
 export default function App() {
 
@@ -42,22 +44,15 @@ return (
 		<Text style={styles.judulAplikasi}>NewsApp</Text>
 		<ScrollView horizontal
 			style={styles.containerGambar}
-		>
-			<Image source={
-					require("./images/berita.jpg")
-			} style={styles.gambarHightlight} />
-			<Image source={
-				require("./images/berita.jpg")
-			} style={styles.gambarHightlight} />
-			<Image source={
-				require("./images/berita.jpg")
-			} style={styles.gambarHightlight} />
+		>			
+			<GambarBerita gambar={require("./images/berita.jpg")} />
+			<GambarBerita gambar={require("./images/berita.jpg")} />
+			<GambarBerita gambar={require("./images/berita.jpg")} />
+			<GambarBerita gambar={require("./images/berita.jpg")} />
+			<GambarBerita gambar={require("./images/berita.jpg")} />
 		</ScrollView>
 
-		<View style={styles.navigasi}>
-			<Text style={styles.tombol}>Previous</Text>
-			<Text style={styles.tombol}>Next</Text>
-		</View>
+		<MenuNavigasi />
 
 		{/* View container berita */}
 		<View style={styles.containerBerita}>
@@ -65,22 +60,25 @@ return (
 			{
 					berita.map((item, index) => {
 						return (
-							<View style={styles.artikelBerita}> 
-								<Image
-										resizeMode='cover'
-										style={styles.gambarBerita}
-										source={item.gambar} />
-								<Text style={styles.judulBerita}>{item.judul}</Text>
-								<Text
-										style={styles.teksBerita}
-								>{item.isi}</Text>
-						</View>
+							<CardBerita
+								gambar={item.gambar}
+								judul={item.judul}
+								isi={item.isi}
+							/>
 						)
 					})
 			}
 		</View>
+		<MenuNavigasi />
 	</ScrollView>
 )
+}
+
+function GambarBerita(props) {
+	return (
+		<Image source={props.gambar}
+			style={styles.gambarHightlight} />
+	)
 }
 
 
@@ -102,42 +100,9 @@ const styles = StyleSheet.create({
 		marginLeft: 10,
 		height: 250
 	},
-	navigasi:{ 
-		flexDirection: "row",
-		justifyContent: "space-between",
-		margin: 10
-	},
-	tombol: { 
-		backgroundColor: "blue",
-		padding: 10,
-		width: 100,
-		color: "white",
-		borderRadius: 5,
-		textAlign: "center"
-	},
 	containerBerita: { 
 		paddingHorizontal: 10
 	},
-	artikelBerita: { 
-		marginBottom: 10,
-		borderRadius: 10,
-		overflow: "hidden",
-		backgroundColor: "#fff",
-		elevation: 3
-	},
-	gambarBerita: { 
-		width: "100%",
-		height: 150
-	},
-	judulBerita: { 
-		padding: 10,
-		fontSize: 16,
-		fontWeight: "bold"
-	},
-	teksBerita: { 
-		paddingHorizontal: 10,
-		paddingBottom: 10,
-		fontSize: 14,
-		color: "#666"
-	}
 });
+
+
