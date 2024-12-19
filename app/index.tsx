@@ -20,12 +20,21 @@ return (
 		<Text style={styles.judulAplikasi}>NewsApp</Text>
 		<ScrollView horizontal
 			style={styles.containerGambar}
-		>			
-			<GambarBerita gambar={require("./images/berita.jpg")} />
-			<GambarBerita gambar={require("./images/berita.jpg")} />
-			<GambarBerita gambar={require("./images/berita.jpg")} />
-			<GambarBerita gambar={require("./images/berita.jpg")} />
-			<GambarBerita gambar={require("./images/berita.jpg")} />
+		>	
+			{
+				berita.map((item, index) => {
+					return (
+						<Link href={{ 
+							pathname: "/gambar/[id]",
+							params: {
+								id: item.id
+							}
+						 }}>
+							<GambarBerita gambar={item.gambar} />
+						</Link>
+					)
+				})
+			}		
 		</ScrollView>
 
 		<MenuNavigasi />
@@ -63,7 +72,6 @@ function GambarBerita(props) {
 			style={styles.gambarHightlight} />
 	)
 }
-
 
 const styles = StyleSheet.create({
 	judulAplikasi: { 
