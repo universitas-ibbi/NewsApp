@@ -6,39 +6,15 @@ Image,
 StyleSheet
 } from 'react-native'
 
+import { Link } from 'expo-router';
+
 import MenuNavigasi from "./components/MenuNavigasi";
 import CardBerita from "./components/CardBerita";
 
+import berita from "./data.js";
+
 export default function App() {
 
-	const berita = [
-		{
-			id: 1,
-			judul: "Judul Berita 1",
-			isi: "Berita 1",
-			gambar: require("./images/berita.jpg")
-		},
-		{
-			id: 2,
-			judul: "Judul Berita 2",
-			isi: "berita 2",
-			gambar: require("./images/berita.jpg")
-		},
-		{
-			id: 3,
-			judul: "Judul Berita 3",
-			isi: "berita 3",
-			gambar: require("./images/berita.jpg")
-		},
-		{
-			id: 4,
-			judul: "Medan Banjir",
-			isi: "Hujan terus, medan jadi banjir 1 meter",
-			gambar: require("./images/berita.jpg")
-		}
-	];
-
-	
 return (
 	<ScrollView>
 		<Text style={styles.judulAplikasi}>NewsApp</Text>
@@ -60,11 +36,18 @@ return (
 			{
 					berita.map((item, index) => {
 						return (
-							<CardBerita
-								gambar={item.gambar}
-								judul={item.judul}
-								isi={item.isi}
-							/>
+							<Link href={{ 
+								pathname: "/detail/[id]",
+								params: {
+									id: item.id
+								}
+							 }}>
+								<CardBerita
+									gambar={item.gambar}
+									judul={item.judul}
+									isi={item.isi}
+								/>
+							</Link>
 						)
 					})
 			}
